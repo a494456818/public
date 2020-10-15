@@ -4,9 +4,27 @@ API 规定：
 
 1. 分页参数page从0开始
 2. 超链接中含有/multiple表示返回的对象可能有多个，返回时用rows参数来封装对象，totals表示总数；
-3. 超链接中含有/single表示返回的对象有且为一个，返回时用row参数来封装对象；
+3. 超链接中含有/single表示返回的对象有且为一个，返回时用row参数来封装对象，row中封装的对象格式为：
+
+```
+row: {
+		id:
+		name:
+		remark
+		isdelete:
+		gmtcreate:
+		gmtmodified:
+		share: { // 如果还有对象，继续json封装，此内部对象需不需要读取出来，视情况而定
+			...
+		}
+		doctors: [{医生1}, {医生2}]  // 如果还有对象数组，使用数组形式的json封装
+	}
+```
+
 4. 返回数据中必须含有状态status和msg。当且仅当status=0时，表示成功（成功由业务自己控制，可以使不出BUG表示成功，也可以使成功查询到数据表示成功）；其它状态均表示失败；
-5. 数据库相关API的超链接规则：/数据库表/操作名称（查select、增add、删del、修modify）/条件1/条件2/.../数据对象。
+
+5. 数据库相关API的超链接规则：/数据库表/操作名称（查select、增add、删del、修modify）/条件1/条件2/.../数据对象；
+6. 返回的时间gmtcreate和gmtmodified为时间戳形式。
 
 公共规定：
 
@@ -24,6 +42,9 @@ API包含内容：
 ## 1.1 医院表（hospital）  
 
 ### 1.1.1 查询单个医院信息（ID）
+
+- [ ] 开发完成
+- [ ] 测试完成
 
 超链接：/hospital/select/single/hospitalByID
 
@@ -46,6 +67,9 @@ API包含内容：
 ```
 
 ### 1.1.2 查询医院信息（分页+条件）
+
+- [ ] 开发完成
+- [ ] 测试完成
 
 超链接：/hospital/select/multiple/paging/hospitalInfo
 
@@ -82,6 +106,9 @@ API包含内容：
 
 ### 1.1.3 增加新医院
 
+- [ ] 开发完成
+- [ ] 测试完成
+
 超链接：/hospital/add/hospitalInfo
 
 输入数据：
@@ -106,6 +133,9 @@ API包含内容：
 ```
 
 ### 1.1.4 删除医院
+
+- [ ] 开发完成
+- [ ] 测试完成
 
 超链接：/hospital/del/hospitalByIDs
 
@@ -132,6 +162,9 @@ API包含内容：
 
 ### 1.2.1 查询单个科室信息（ID）
 
+- [ ] 开发完成
+- [ ] 测试完成
+
 超链接：/department/select/single/departmentByID
 
 输入数据：
@@ -153,6 +186,9 @@ API包含内容：
 ```
 
 ### 1.2.2 查询科室信息（分页+条件）
+
+- [ ] 开发完成
+- [ ] 测试完成
 
 超链接：/department/select/multiple/paging/departmentInfo
 
@@ -190,6 +226,9 @@ API包含内容：
 
 ### 1.2.3 增加新科室
 
+- [ ] 开发完成
+- [ ] 测试完成
+
 超链接：/department/add/departmentInfo
 
 输入数据：
@@ -216,6 +255,9 @@ API包含内容：
 
 ### 1.2.4 删除科室
 
+- [ ] 开发完成
+- [ ] 测试完成
+
 超链接：/department/del/departmentByIDs
 
 方法描述：根据ID删除科室信息，仅修改is_delete状态。可删除1个，也可删除多个。
@@ -241,6 +283,9 @@ API包含内容：
 
 ### 1.3.1 查询单个医生信息（ID）
 
+- [ ] 开发完成
+- [ ] 测试完成
+
 超链接：/doctor/select/single/doctorByID
 
 输入数据：
@@ -262,6 +307,9 @@ API包含内容：
 ```
 
 ### 1.3.2 查询医生信息（分页+条件）
+
+- [ ] 开发完成
+- [ ] 测试完成
 
 超链接：/doctor/select/multiple/paging/doctorInfo
 
@@ -303,6 +351,9 @@ API包含内容：
 ```
 
 ### 1.3.3 增加新医生
+
+- [ ] 开发完成
+- [ ] 测试完成
 
 超链接：/doctor/add/doctorInfo
 
@@ -352,6 +403,9 @@ API包含内容：
 
 ### 1.3.4 删除医生
 
+- [ ] 开发完成
+- [ ] 测试完成
+
 超链接：/doctor/del/doctorByIDs
 
 方法描述：根据ID删除医生信息，仅修改is_delete状态。可删除1个，也可删除多个。
@@ -377,6 +431,9 @@ API包含内容：
 
 ### 1.4.1 查询文件树中单个node信息（ID）
 
+- [ ] 开发完成
+- [ ] 测试完成
+
 超链接：/filetree/select/single/nodeByID
 
 输入数据：
@@ -398,6 +455,9 @@ API包含内容：
 ```
 
 ### 1.4.2 * 查询文件树信息（分页+条件）
+
+- [ ] 开发完成
+- [ ] 测试完成
 
 超链接：/filetree/select/multiple/paging/nodeInfo
 
@@ -439,6 +499,9 @@ API包含内容：
 
 ### 1.4.3 增加新节点
 
+- [ ] 开发完成
+- [ ] 测试完成
+
 超链接：/filetree/add/nodeInfo
 
 方法描述：某个医生在文件夹中创建一个文件或者文件夹。
@@ -471,6 +534,9 @@ API包含内容：
 
 ### 1.4.4 删除文件树中的节点
 
+- [ ] 开发完成
+- [ ] 测试完成
+
 超链接：/filetree/del/nodeByIDs
 
 方法描述：根据ID删除节点信息，仅修改is_delete状态。可删除1个，也可删除多个。**注意：如果删除的是文件夹，需要递归把文件夹下的所有文件夹和文件删除。**
@@ -494,7 +560,125 @@ API包含内容：
 
 ## 1.5 群聊表（chat）   
 
+### 1.5.1 查询单个群聊信息（ID）
 
+- [ ] 开发完成
+- [ ] 测试完成
+
+超链接：/chat/select/single/chatByID
+
+输入数据：
+
+```
+{
+	id:
+}
+```
+
+返回数据：
+
+```
+{
+	row: {群聊对象}
+	status: 0
+	msg: ""
+}
+```
+
+### 1.5.2 查询群聊信息（分页+条件）
+
+- [ ] 开发完成
+- [ ] 测试完成
+
+超链接：/chat/select/multiple/paging/chatInfo
+
+输入数据：
+
+```
+{
+	// 分页参数
+	page:
+	pagesize:
+	// 下面为数据库中的条件参数, 模糊查询字段（address、remark）
+	id:
+	name:
+	remark:
+	isdelete:
+	shareid:
+	doctorids: // 本条件使用英文逗号分隔，如: "111,222,333", 后台查询包含这些医生id的群聊, 这些id是无需的, 不要硬匹配或使用"=="或LIKE
+}
+```
+
+返回数据：
+
+```
+{
+	rows: [
+		{群聊对象1},
+		{群聊对象2},
+		...
+	]
+	totals: 12
+	status: 0
+	msg: ""
+}
+```
+
+### 1.5.3 增加新群聊
+
+- [ ] 开发完成
+- [ ] 测试完成
+
+超链接：/chat/add/chatInfo
+
+方法描述：增加新群聊，注意分享发起人的doctorids必须在第一个。
+
+输入数据：
+
+```
+{
+	name:
+	remark:
+	isdelete:
+	shareid:
+	doctorids: // 如: "111,222,333"
+}
+```
+
+返回数据：
+
+```
+{
+	status: 0
+	msg: ""
+}
+```
+
+### 1.5.4 删除群聊
+
+- [ ] 开发完成
+- [ ] 测试完成
+
+超链接：/chat/del/chatByIDs
+
+方法描述：根据ID删除chat信息，仅修改is_delete状态。可删除1个，也可删除多个。
+
+输入数据：
+
+```
+{
+	ids: // 必须，输入的id是以英文逗号分隔的id字符串，例如："1111,2222,3333"
+}
+```
+
+返回数据：
+
+```
+{
+	status: 0
+	msg: ""
+}
+```
 
 ## 1.6 消息日志表（informationlog）  
 
