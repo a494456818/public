@@ -56,7 +56,8 @@ API包含内容：
 	// 分页参数
 	page:
 	pagesize:
-	// 下面为数据库中的条件参数
+	// 下面为数据库中的条件参数，模糊查询（address、remark）
+	id:
 	name:
 	address:
 	remark:
@@ -73,6 +74,7 @@ API包含内容：
 		{医院对象2},
 		...
 	]
+	totals: 20
 	status: 0
 	msg: ""
 }
@@ -161,7 +163,8 @@ API包含内容：
 	// 分页参数
 	page:
 	pagesize:
-	// 下面为数据库中的条件参数
+	// 下面为数据库中的条件参数，模糊查询（address、remark）
+	id:
 	name:
 	address:
 	remark:
@@ -179,6 +182,7 @@ API包含内容：
 		{科室对象2},
 		...
 	]
+	totals: 12
 	status: 0
 	msg: ""
 }
@@ -233,29 +237,266 @@ API包含内容：
 }
 ```
 
-
-
-
-
 ## 1.3 医生表（doctor）
 
+### 1.3.1 查询单个医生信息（ID）
 
+超链接：/doctor/select/single/doctorByID
 
+输入数据：
 
+```
+{
+	id:
+}
+```
+
+返回数据：
+
+```
+{
+	row: {医生对象}
+	status: 0
+	msg: ""
+}
+```
+
+### 1.3.2 查询医生信息（分页+条件）
+
+超链接：/doctor/select/multiple/paging/doctorInfo
+
+输入数据：
+
+```
+{
+	// 分页参数
+	page:
+	pagesize:
+	// 下面为数据库中的条件参数, 模糊查询字段（address、remark）
+	id:
+	username:
+	password:
+	email:
+	level:
+	phone:
+	address:
+	remark:
+	type:
+	isdelete:
+	departmentid:
+}
+```
+
+返回数据：
+
+```
+{
+	rows: [
+		{医生对象1},
+		{医生对象2},
+		...
+	]
+	totals: 12
+	status: 0
+	msg: ""
+}
+```
+
+### 1.3.3 增加新医生
+
+超链接：/doctor/add/doctorInfo
+
+方法描述：添加新医生，在添加新医生后，检查该是否有文件树，如果没有文件树将自动创建带有根节点的文件树。
+
+初始化的文件树各个字段为：
+
+```
+{
+	pid: -1,
+	isdir: 1,
+	name: "root",
+	path: "",
+	attributes: "",
+	remark: "",
+	isdelete: 0
+}
+```
+
+输入数据：
+
+```
+{
+	// 和数据库表中字段一致
+	id:
+	username:
+	password:
+	email:
+	level:
+	phone:
+	address:
+	remark:
+	type:
+	isdelete:
+	departmentid: // 必须，医生必须在科室下
+}
+```
+
+返回数据：
+
+```
+{
+	status: 0
+	msg: ""
+}
+```
+
+### 1.3.4 删除医生
+
+超链接：/doctor/del/doctorByIDs
+
+方法描述：根据ID删除医生信息，仅修改is_delete状态。可删除1个，也可删除多个。
+
+输入数据：
+
+```
+{
+	ids: // 必须，输入的id是以英文逗号分隔的id字符串，例如："1111,2222,3333"
+}
+```
+
+返回数据：
+
+```
+{
+	status: 0
+	msg: ""
+}
+```
 
 ## 1.4 文件树（filetree）  
 
+### 1.4.1 查询文件树中单个node信息（ID）
 
+超链接：/filetree/select/single/nodeByID
 
+输入数据：
 
+```
+{
+	id:
+}
+```
+
+返回数据：
+
+```
+{
+	row: {医生对象}
+	status: 0
+	msg: ""
+}
+```
+
+### 1.4.2 * 查询文件树信息（分页+条件）
+
+超链接：/filetree/select/multiple/paging/nodeInfo
+
+输入数据：
+
+```
+{
+	// 分页参数
+	page:
+	pagesize:
+	// 下面为数据库中的条件参数, 模糊查询字段（name、attributes）
+	id:
+	pid:  // * 如果传递该参数，查询处于该pid下的节点
+	isdir: 
+	name:
+	path:
+	attributes:
+	remark:
+	isdelete:
+	doctorid: 
+}
+```
+
+返回数据：
+
+```
+{
+	// 需在每个节点对象中加入该节点在文件树中的路径（nodepath），例如：/a/b/c/1.dcm
+	rows: [
+		{节点对象1},
+		{key1: value1, "nodepath": "/a/b/c/1.dcm"}, // 节点对象2
+		...
+	]
+	totals: 5
+	status: 0
+	msg: ""
+}
+```
+
+### 1.4.3 增加新节点
+
+超链接：/filetree/add/nodeInfo
+
+方法描述：某个医生在文件夹中创建一个文件或者文件夹。
+
+输入数据：
+
+```
+{
+	// 和数据库表中字段一致
+	id:
+	pid:  // 必须
+	isdir:  // 必须
+	name:  // 必须
+	path:  
+	attributes:
+	remark:
+	isdelete: 0  // 非必须，不传后台默认给0
+	doctorid:  // 必须
+}
+```
+
+返回数据：
+
+```
+{
+	status: 0
+	msg: ""
+}
+```
+
+### 1.4.4 删除文件树中的节点
+
+超链接：/filetree/del/nodeByIDs
+
+方法描述：根据ID删除节点信息，仅修改is_delete状态。可删除1个，也可删除多个。**注意：如果删除的是文件夹，需要递归把文件夹下的所有文件夹和文件删除。**
+
+输入数据：
+
+```
+{
+	ids: // 必须，输入的id是以英文逗号分隔的id字符串，例如："1111,2222,3333"
+}
+```
+
+返回数据：
+
+```
+{
+	status: 0
+	msg: ""
+}
+```
 
 ## 1.5 群聊表（chat）   
 
 
 
 ## 1.6 消息日志表（informationlog）  
-
-
 
 
 
