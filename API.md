@@ -24,7 +24,8 @@ row: {
 4. 返回数据中必须含有状态status和msg。当且仅当status=0时，表示成功（成功由业务自己控制，可以使不出BUG表示成功，也可以使成功查询到数据表示成功）；其它状态均表示失败；
 
 5. 数据库相关API的超链接规则：/数据库表/操作名称（查select、增add、删del、修modify）/条件1/条件2/.../数据对象；
-6. 返回的时间gmtcreate和gmtmodified为时间戳形式。
+6. 返回的时间gmtcreate和gmtmodified为时间戳形式；
+7. 所有的1.*.2的方法，一定是**按时间倒序**。
 
 公共规定：
 
@@ -682,7 +683,127 @@ API包含内容：
 
 ## 1.6 消息日志表（informationlog）  
 
+### 1.6.1 查询单个信息（ID）
 
+- [ ] 开发完成
+- [ ] 测试完成
+
+超链接：/informationlog/select/single/informationlogByID
+
+输入数据：
+
+```
+{
+	id:
+}
+```
+
+返回数据：
+
+```
+{
+	row: {信息对象}
+	status: 0
+	msg: ""
+}
+```
+
+### 1.6.2 查询信息（分页+条件）
+
+- [ ] 开发完成
+- [ ] 测试完成
+
+超链接：/informationlog/select/multiple/paging/informationlogInfo
+
+输入数据：
+
+```
+{
+	// 分页参数
+	page:
+	pagesize:
+	// 下面为数据库中的条件参数, 模糊查询字段（address、remark）
+	id:
+	type:
+	remark:
+	isdelete:
+	chatid:
+	informationid: :
+	doctorid:
+}
+```
+
+返回数据：
+
+```
+{
+	rows: [
+		{信息对象1},
+		{信息对象2},
+		...
+	]
+	totals: 12
+	status: 0
+	msg: ""
+}
+```
+
+### 1.6.3 增加新群聊（发送消息）
+
+- [ ] 开发完成
+- [ ] 测试完成
+
+超链接：/informationlog/add/informationlogInfo
+
+方法描述：增加新群聊，注意分享发起人的doctorids必须在第一个。
+
+输入数据：
+
+```
+{
+	type:
+	remark:
+	isdelete: 0
+	chatid:
+	informationid: :
+	doctorid:
+}
+```
+
+返回数据：
+
+```
+{
+	status: 0
+	msg: ""
+}
+```
+
+### 1.6.4 删除群聊
+
+- [ ] 开发完成
+- [ ] 测试完成
+
+超链接：/informationlog/del/informationlogByIDs
+
+方法描述：根据ID删除信息，仅修改is_delete状态。可删除1个，也可删除多个。
+
+输入数据：
+
+```
+{
+	ids: // 必须，输入的id是以英文逗号分隔的id字符串，例如："1111,2222,3333"
+}
+```
+
+返回数据：
+
+```
+{
+	status: 0
+	msg: ""
+}
+```
 
 ## 1.7 消息表（information）
 
