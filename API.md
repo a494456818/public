@@ -10,9 +10,10 @@ API 规定：
 
 公共规定：
 
-1. 增加：所有增加方法，前台如果不传is_delele字段参数，后台默认赋值为0；插入数据时，自动赋值gmt_create、gmt_modified为当前时间；
-2. 删除：所有删除方法，仅修改is_delete字段，切勿真删除；
-3. 修改：使用修改方法后，更新数据库字段时间：gmt_modified。
+1. 增加：所有增加方法，前台如果不传isdelele字段参数，后台默认赋值为0；插入数据时，自动赋值gmt_create、gmt_modified为当前时间；
+2. 删除：所有删除方法，仅修改isdelete字段，切勿真删除；
+3. 修改：使用修改方法后，更新数据库字段时间：gmt_modified；
+4. **重要：所有数据中的字段，前台在传递参数时，必须小写。比如数据库中的is_delete方法，传参数时使用isdelete。**
 
 API包含内容：
 
@@ -58,7 +59,8 @@ API包含内容：
 	// 下面为数据库中的条件参数
 	name:
 	address:
-	...
+	remark:
+	isdelete:
 }
 ```
 
@@ -88,7 +90,7 @@ API包含内容：
 	name: // 必须
 	address: // 必须
 	remark: // 非必须
-	is_delete: // 非必须，默认为0
+	isdelete: // 非必须，默认为0
 }
 ```
 
@@ -101,15 +103,135 @@ API包含内容：
 }
 ```
 
-1.1.4 删除医院
+### 1.1.4 删除医院
 
+超链接：/hospital/del/hospitalByIDs
 
+方法描述：根据ID删除医院信息，仅修改is_delete状态。可删除1个，也可删除多个。
+
+输入数据：
+
+```
+{
+	ids: // 必须，输入的id是以英文逗号分隔的id字符串，例如："1111,2222,3333"
+}
+```
+
+返回数据：
+
+```
+{
+	status: 0
+	msg: ""
+}
+```
 
 ## 1.2 科室表（department）
 
-### 1.2.1
+### 1.2.1 查询单个科室信息（ID）
 
+超链接：/department/select/single/departmentByID
 
+输入数据：
+
+```
+{
+	id:
+}
+```
+
+返回数据：
+
+```
+{
+	row: {科室对象}
+	status: 0
+	msg: ""
+}
+```
+
+### 1.2.2 查询科室信息（分页+条件）
+
+超链接：/department/select/multiple/paging/departmentInfo
+
+输入数据：
+
+```
+{
+	// 分页参数
+	page:
+	pagesize:
+	// 下面为数据库中的条件参数
+	name:
+	address:
+	remark:
+	isdelete:
+	hospitalid:
+}
+```
+
+返回数据：
+
+```
+{
+	rows: [
+		{科室对象1},
+		{科室对象2},
+		...
+	]
+	status: 0
+	msg: ""
+}
+```
+
+### 1.2.3 增加新科室
+
+超链接：/department/add/departmentInfo
+
+输入数据：
+
+```
+{
+	// 和数据库表中字段一致
+	name: // 必须
+	address: // 必须
+	remark: // 非必须
+	isdelete: // 非必须，默认为0
+	hospitalid: // 必须，创建科室必须指定所示医院
+}
+```
+
+返回数据：
+
+```
+{
+	status: 0
+	msg: ""
+}
+```
+
+### 1.2.4 删除科室
+
+超链接：/department/del/departmentByIDs
+
+方法描述：根据ID删除科室信息，仅修改is_delete状态。可删除1个，也可删除多个。
+
+输入数据：
+
+```
+{
+	ids: // 必须，输入的id是以英文逗号分隔的id字符串，例如："1111,2222,3333"
+}
+```
+
+返回数据：
+
+```
+{
+	status: 0
+	msg: ""
+}
+```
 
 
 
@@ -120,6 +242,30 @@ API包含内容：
 
 
 
+
+## 1.4 文件树（filetree）  
+
+
+
+
+
+## 1.5 群聊表（chat）   
+
+
+
+## 1.6 消息日志表（informationlog）  
+
+
+
+
+
+## 1.7 消息表（information）
+
+
+
+## ==== 以下是关联表 ====
+
+## 1.8 医院-科室表 （hospital_department）
 
 
 
