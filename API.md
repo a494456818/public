@@ -21,7 +21,7 @@ row: {
 	}
 ```
 
-4. 返回数据中必须含有状态status和msg。当且仅当status=0时，表示成功（成功由业务自己控制，可以使不出BUG表示成功，也可以使成功查询到数据表示成功）；其它状态均表示失败；
+4. 返回数据中必须含有状态status和msg。当且仅当status=0（整型）时，表示成功（成功由业务自己控制，可以使不出BUG表示成功，也可以使成功查询到数据表示成功）；其它状态均表示失败；
 5. 数据库相关API的超链接规则：/数据库表/操作名称（查select、增add、删del、修modify）/条件1/条件2/.../数据对象；
 6. 返回的时间gmtcreate和gmtmodified为时间戳形式；
 7. 所有的1.*.2的方法，一定是**按时间倒序**;
@@ -969,7 +969,7 @@ API包含内容：
 
 ```
 {
-	name:
+	name: // 必须
 	remark:
 	isDelete:
 	shareId:
@@ -1475,7 +1475,7 @@ API包含内容：
 
 因为是关联表，所以在查询时，需要把关联的外键对象查询出来。
 
-### 1.8.1 查询单个信息（ID）
+### 1.8.1 查询单个分享（ID）
 
 - [ ] 开发完成
 - [ ] 测试完成
@@ -1519,7 +1519,7 @@ API包含内容：
 }
 ```
 
-### 1.8.2 查询信息（分页+条件）
+### 1.8.2 查询分享（分页+条件）
 
 - [ ] 开发完成
 - [ ] 测试完成
@@ -1563,7 +1563,7 @@ API包含内容：
 
 超链接：/share/add/shareInfo
 
-方法描述：增加新信息，和1.6一起使用。
+方法描述：增加新信息。
 
 输入数据：
 
@@ -1612,7 +1612,305 @@ API包含内容：
 }
 ```
 
-## 
+## 1.9 医生-图像 诊断表（doctor_filetree）
+
+### 1.9.1 查询单个诊断信息（ID）
+
+- [ ] 开发完成
+- [ ] 测试完成
+
+超链接：/doctor_filetree/select/single/doctorFiletreeByID
+
+输入数据：
+
+```
+{
+	id:
+}
+```
+
+返回数据：
+
+```
+{
+	row: {医生-图像 诊断信息}
+	status: 0
+	msg: ""
+}
+```
+
+### 1.9.2 查询诊断信息（分页+条件）
+
+- [ ] 开发完成
+- [ ] 测试完成
+
+超链接：/doctor_filetree/select/multiple/paging/doctorFiletreeInfo
+
+输入数据：
+
+```
+{
+	// 分页参数
+	page:
+	pagesize:
+	// 下面为数据库中的条件参数, 模糊查询字段（address、remark）
+	id:
+	result:
+	remark:
+	isDelete:
+	gmtCreate:
+	gmtModified:
+	doctorId:
+	filetreeId:
+}
+```
+
+返回数据：
+
+```
+{
+	rows: [
+		{医生-图像 诊断对象1, 医生-图像 诊断对象2, ...},
+	]
+	totals: 12
+	status: 0
+	msg: ""
+}
+```
+
+### 1.9.3 增加新诊断信息
+
+- [ ] 开发完成
+- [ ] 测试完成
+
+超链接：/doctor_filetree/add/doctorFiletreeInfo
+
+方法描述：增加新诊断信息
+
+输入数据：
+
+```
+{
+	result:
+	remark:
+	isDelete:
+	doctorId:
+	filetreeId:
+}
+```
+
+返回数据：
+
+```
+{
+	status: 0
+	msg: ""
+}
+```
+
+### 1.9.4 删除诊断信息
+
+- [ ] 开发完成
+- [ ] 测试完成
+
+超链接：/doctor_filetree/del/doctorFiletreeByIDs
+
+方法描述：根据ID删除诊断信息，仅修改is_delete状态。可删除1个，也可删除多个。
+
+输入数据：
+
+```
+{
+	ids: // 必须，输入的id是以英文逗号分隔的id字符串，例如："1111,2222,3333"
+}
+```
+
+返回数据：
+
+```
+{
+	status: 0
+	msg: ""
+}
+```
+
+### 1.9.5 查询未下载的图片数量
+
+- [ ] 开发完成
+- [ ] 测试完成
+
+超链接：/doctor_filetree/select/single/unDownloadNum
+
+方法描述：查询未下载的图像数量，也就是在该表中查询当天status=1的图像。
+
+输入数据：
+
+```
+{
+	
+}
+```
+
+返回数据：
+
+```
+{
+	status: 0
+	msg: ""
+}
+```
+
+### 1.9.6 下载未下载的图片数量（有疑问，讨论）
+
+- [ ] 开发完成
+- [ ] 测试完成
+
+超链接：/doctor_filetree/select/multiple/downloadUnDLDcmAndAnno
+
+方法描述：查找status=1的数据，将对应的图像通过网络传输出去（传送dcm和标注文件），并修改status=2。
+
+输入数据：
+
+```
+{
+	
+}
+```
+
+返回数据：
+
+```
+{
+	status: 0
+	msg: ""
+}
+```
+
+
+
+## 1.10 提醒表（warning）
+
+### 1.10.1 查询单个提醒信息（ID）
+
+- [ ] 开发完成
+- [ ] 测试完成
+
+超链接：/warning/select/single/warningByID
+
+输入数据：
+
+```
+{
+	id:
+}
+```
+
+返回数据：
+
+```
+{
+	row: {提醒信息}
+	status: 0
+	msg: ""
+}
+```
+
+### 1.10.2 查询提醒信息（分页+条件）
+
+- [ ] 开发完成
+- [ ] 测试完成
+
+超链接：/warning/select/multiple/paging/warningInfo
+
+输入数据：
+
+```
+{
+	// 分页参数
+	page:
+	pagesize:
+	// 下面为数据库中的条件参数, 模糊查询字段（address、remark）
+	id:
+	content:
+	remark:
+	isRead:
+	isDelete:
+	gmtCreate:
+	gmtModified:
+	sendDoctorId:
+	receiveDoctorId:
+}
+```
+
+返回数据：
+
+```
+{
+	rows: [
+		{提醒1,提醒2, ...},
+	]
+	totals: 12
+	status: 0
+	msg: ""
+}
+```
+
+### 1.10.3 增加新提醒信息
+
+- [ ] 开发完成
+- [ ] 测试完成
+
+超链接：/warning/add/warningInfo
+
+方法描述：增加新诊断信息
+
+输入数据：
+
+```
+{
+	content:
+	remark:
+	isRead:
+	isDelete:
+	sendDoctorId:
+	receiveDoctorId:
+}
+```
+
+返回数据：
+
+```
+{
+	status: 0
+	msg: ""
+}
+```
+
+### 1.10.4 删除提醒信息
+
+- [ ] 开发完成
+- [ ] 测试完成
+
+超链接：/warning/del/warningByIDs
+
+方法描述：根据ID删除提醒信息，仅修改is_delete状态。可删除1个，也可删除多个。
+
+输入数据：
+
+```
+{
+	ids: // 必须，输入的id是以英文逗号分隔的id字符串，例如："1111,2222,3333"
+}
+```
+
+返回数据：
+
+```
+{
+	status: 0
+	msg: ""
+}
+```
 
 # 2. 业务相关
 
