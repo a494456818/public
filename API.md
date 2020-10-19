@@ -164,7 +164,7 @@ API包含内容：
 - [ ] 开发完成
 - [ ] 测试完成
 
-超链接：/hospital/find/departmentByHospitalID
+超链接：/hospital/find/departmentsByHospitalID
 
 方法描述：根据医院ID查询所属医院的所有科室。
 
@@ -195,7 +195,7 @@ API包含内容：
 - [ ] 开发完成
 - [ ] 测试完成
 
-超链接：/hospital/del/hospitalByIDs
+超链接：/hospital/find/doctorsByHospitalID
 
 方法描述：根据ID删除医院信息，仅修改is_delete状态。可删除1个，也可删除多个。
 
@@ -203,7 +203,7 @@ API包含内容：
 
 ```
 {
-	ids: // 必须，输入的id是以英文逗号分隔的id字符串，例如："1111,2222,3333"
+	id: 
 }
 ```
 
@@ -211,6 +211,11 @@ API包含内容：
 
 ```
 {
+	rows: [{
+		医生1,
+		医生2,
+		...
+	}]
 	status: 0
 	msg: ""
 }
