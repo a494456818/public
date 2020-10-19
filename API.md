@@ -159,6 +159,63 @@ API包含内容：
 }
 ```
 
+### 1.1.5 根据医院查询所有科室
+
+- [ ] 开发完成
+- [ ] 测试完成
+
+超链接：/hospital/find/departmentByHospitalID
+
+方法描述：根据医院ID查询所属医院的所有科室。
+
+输入数据：
+
+```
+{
+	id: // 必须
+}
+```
+
+返回数据：
+
+```
+{
+	rows: [{
+		科室1,
+		科室2,
+		...
+	}]
+	status: 0
+	msg: ""
+}
+```
+
+### 1.1.6 根据医院查询所有医生
+
+- [ ] 开发完成
+- [ ] 测试完成
+
+超链接：/hospital/del/hospitalByIDs
+
+方法描述：根据ID删除医院信息，仅修改is_delete状态。可删除1个，也可删除多个。
+
+输入数据：
+
+```
+{
+	ids: // 必须，输入的id是以英文逗号分隔的id字符串，例如："1111,2222,3333"
+}
+```
+
+返回数据：
+
+```
+{
+	status: 0
+	msg: ""
+}
+```
+
 ## 1.2 科室表（department）
 
 ### 1.2.1 查询单个科室信息（ID）
@@ -928,7 +985,124 @@ API包含内容：
 
 ## 1.8 医院-科室表 （hospital_department）
 
+### 1.8.1 查询单个信息（ID）
 
+- [ ] 开发完成
+- [ ] 测试完成
+
+超链接：/information/select/single/informationByID
+
+输入数据：
+
+```
+{
+	id:
+}
+```
+
+返回数据：
+
+```
+{
+	row: {信息对象}
+	status: 0
+	msg: ""
+}
+```
+
+### 1.7.2 查询信息（分页+条件）
+
+- [ ] 开发完成
+- [ ] 测试完成
+
+超链接：/information/select/multiple/paging/informationInfo
+
+输入数据：
+
+```
+{
+	// 分页参数
+	page:
+	pagesize:
+	// 下面为数据库中的条件参数, 模糊查询字段（address、remark）
+	id:
+	content:
+	remark:
+	isdelete:
+}
+```
+
+返回数据：
+
+```
+{
+	rows: [
+		{信息对象1},
+		{信息对象2},
+		...
+	]
+	totals: 12
+	status: 0
+	msg: ""
+}
+```
+
+### 1.7.3 增加新信息（发送消息）
+
+- [ ] 开发完成
+- [ ] 测试完成
+
+超链接：/information/add/informationInfo
+
+方法描述：增加新信息，和1.6一起使用。
+
+输入数据：
+
+```
+{
+	id:
+	content:
+	remark:
+	isdelete:
+}
+```
+
+返回数据：
+
+```
+{
+	status: 0
+	msg: ""
+}
+```
+
+### 1.7.4 删除信息
+
+- [ ] 开发完成
+- [ ] 测试完成
+
+超链接：/information/del/informationByIDs
+
+方法描述：根据ID删除信息，仅修改is_delete状态。可删除1个，也可删除多个。
+
+输入数据：
+
+```
+{
+	ids: // 必须，输入的id是以英文逗号分隔的id字符串，例如："1111,2222,3333"
+}
+```
+
+返回数据：
+
+```
+{
+	status: 0
+	msg: ""
+}
+```
+
+## 
 
 # 2. 业务相关
 
