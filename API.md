@@ -159,12 +159,43 @@ API包含内容：
 }
 ```
 
-### 1.1.5 根据医院查询所有科室
+### 1.1.5 修改医院
 
 - [ ] 开发完成
 - [ ] 测试完成
 
-超链接：/hospital/find/departmentsByHospitalID
+超链接：/hospital/modify/hospitalInfo
+
+方法描述：修改医院，修改后更新gmt_modified值
+
+输入数据：
+
+```
+{
+	id: // 必须，医院ID
+	// 要修改的字段，传了就修改，没传不修改
+	name: // 非必须
+	address: // 非必须
+	remark: // 非必须
+	isdelete: // 非必须
+}
+```
+
+返回数据：
+
+```
+{
+	status: 0
+	msg: ""
+}
+```
+
+### 1.1.6 根据医院查询所有科室
+
+- [ ] 开发完成
+- [ ] 测试完成
+
+超链接：/hospital/select/multiple/departmentsByHospitalID
 
 方法描述：根据医院ID查询所属医院的所有科室。
 
@@ -172,7 +203,7 @@ API包含内容：
 
 ```
 {
-	id: // 必须
+	id: // 必须, 医院id
 }
 ```
 
@@ -190,20 +221,20 @@ API包含内容：
 }
 ```
 
-### 1.1.6 根据医院查询所有医生
+### 1.1.7 根据医院查询所有医生
 
 - [ ] 开发完成
 - [ ] 测试完成
 
-超链接：/hospital/find/doctorsByHospitalID
+超链接：/hospital/select/multiple/doctorsByHospitalID
 
-方法描述：根据ID删除医院信息，仅修改is_delete状态。可删除1个，也可删除多个。
+方法描述：根据医院ID查询所属的所有医生
 
 输入数据：
 
 ```
 {
-	id: 
+	id: // 医院id
 }
 ```
 
@@ -337,6 +368,91 @@ API包含内容：
 
 ```
 {
+	status: 0
+	msg: ""
+}
+```
+
+### 1.2.5 修改科室
+
+- [ ] 开发完成
+- [ ] 测试完成
+
+超链接：/department/modify/departmentInfo
+
+方法描述：修改科室
+
+输入数据：
+
+```
+{
+	id: // 必须，科室id
+	// 要修改的字段，传了就修改，没传不修改
+	name: // 非必须
+	address: // 非必须
+	remark: // 非必须
+	isdelete: // 非必须
+}
+```
+
+返回数据：
+
+```
+{
+	status: 0
+	msg: ""
+}
+```
+
+### 1.2.6 根据科室查询所属医院
+
+- [ ] 开发完成
+- [ ] 测试完成
+
+超链接：/department/select/single/hospitalByDepartmentID
+
+方法描述：根据ID删除科室信息，仅修改is_delete状态。可删除1个，也可删除多个。
+
+输入数据：
+
+```
+{
+	id: // 科室id
+}
+```
+
+返回数据：
+
+```
+{
+	row: {
+		医院信息
+	}
+	status: 0
+	msg: ""
+}
+```
+
+### 1.2.6 根据科室查询科室下所有医生
+
+- [ ] 开发完成
+- [ ] 测试完成
+
+超链接：/department/select/multiple/doctorsByDepartmentID
+
+输入数据：
+
+```
+{
+	id: // 科室id
+}
+```
+
+返回数据：
+
+```
+{
+	rows: [{医生1}, {医生2},...]
 	status: 0
 	msg: ""
 }
