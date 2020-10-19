@@ -380,7 +380,7 @@ API包含内容：
 
 超链接：/department/modify/departmentInfo
 
-方法描述：修改科室
+方法描述：修改科室，修改后更新gmt_modified值
 
 输入数据：
 
@@ -601,6 +601,96 @@ API包含内容：
 
 ```
 {
+	status: 0
+	msg: ""
+}
+```
+
+### 1.3.5 修改医生
+
+- [ ] 开发完成
+- [ ] 测试完成
+
+超链接：/doctor/modify/doctorInfo
+
+方法描述：修改医生，，修改后更新gmt_modified值。
+
+输入数据：
+
+```
+{
+	id: // 必须，医生ID
+	// 要修改的字段，传了就修改，没传不修改
+	username:
+	password:
+	email:
+	level:
+	phone:
+	address:
+	remark:
+	type:
+	isdelete:
+}
+```
+
+返回数据：
+
+```
+{
+	status: 0
+	msg: ""
+}
+```
+
+### 1.3.6 根据医生查询所属科室
+
+- [ ] 开发完成
+- [ ] 测试完成
+
+超链接：/doctor/select/single/departmentByDoctorID
+
+输入数据：
+
+```
+{
+	id: // 必须，医生ID
+}
+```
+
+返回数据：
+
+```
+{
+	row: {
+		科室信息
+	}
+	status: 0
+	msg: ""
+}
+```
+
+### 1.3.6 根据医生查询所属医院
+
+- [ ] 开发完成
+- [ ] 测试完成
+
+超链接：/doctor/select/single/hospitalByDoctorID
+
+输入数据：
+
+```
+{
+	id: // 必须，医生ID
+}
+```
+
+返回数据：
+
+```
+{
+	row: {
+		医院信息
+	}
 	status: 0
 	msg: ""
 }
