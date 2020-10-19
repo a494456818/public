@@ -22,10 +22,10 @@ row: {
 ```
 
 4. 返回数据中必须含有状态status和msg。当且仅当status=0时，表示成功（成功由业务自己控制，可以使不出BUG表示成功，也可以使成功查询到数据表示成功）；其它状态均表示失败；
-
 5. 数据库相关API的超链接规则：/数据库表/操作名称（查select、增add、删del、修modify）/条件1/条件2/.../数据对象；
 6. 返回的时间gmtcreate和gmtmodified为时间戳形式；
-7. 所有的1.*.2的方法，一定是**按时间倒序**。
+7. 所有的1.*.2的方法，一定是**按时间倒序**;
+8. 所有的后端方法均在前端使用POST方式来请求。
 
 公共规定：
 
@@ -86,7 +86,7 @@ API包含内容：
 	name:
 	address:
 	remark:
-	isdelete:
+	isDelete:
 }
 ```
 
@@ -120,7 +120,7 @@ API包含内容：
 	name: // 必须
 	address: // 必须
 	remark: // 非必须
-	isdelete: // 非必须，默认为0
+	isDelete: // 非必须，默认为0
 }
 ```
 
@@ -177,7 +177,7 @@ API包含内容：
 	name: // 非必须
 	address: // 非必须
 	remark: // 非必须
-	isdelete: // 非必须
+	isDelete: // 非必须
 }
 ```
 
@@ -298,8 +298,8 @@ API包含内容：
 	name:
 	address:
 	remark:
-	isdelete:
-	hospitalid:
+	isDelete:
+	hospitalId:
 }
 ```
 
@@ -333,8 +333,8 @@ API包含内容：
 	name: // 必须
 	address: // 必须
 	remark: // 非必须
-	isdelete: // 非必须，默认为0
-	hospitalid: // 必须，创建科室必须指定所示医院
+	isDelete: // 非必须，默认为0
+	hospitalId: // 必须，创建科室必须指定所示医院
 }
 ```
 
@@ -391,7 +391,7 @@ API包含内容：
 	name: // 非必须
 	address: // 非必须
 	remark: // 非必须
-	isdelete: // 非必须
+	isDelete: // 非必须
 }
 ```
 
@@ -509,8 +509,8 @@ API包含内容：
 	address:
 	remark:
 	type:
-	isdelete:
-	departmentid:
+	isDelete:
+	departmentId:
 }
 ```
 
@@ -548,7 +548,7 @@ API包含内容：
 	path: "",
 	attributes: "",
 	remark: "",
-	isdelete: 0
+	isDelete: 0
 }
 ```
 
@@ -566,8 +566,8 @@ API包含内容：
 	address:
 	remark:
 	type:
-	isdelete:
-	departmentid: // 必须，医生必须在科室下
+	isDelete:
+	departmentId: // 必须，医生必须在科室下
 }
 ```
 
@@ -629,7 +629,7 @@ API包含内容：
 	address:
 	remark:
 	type:
-	isdelete:
+	isDelete:
 }
 ```
 
@@ -740,13 +740,13 @@ API包含内容：
 	// 下面为数据库中的条件参数, 模糊查询字段（name、attributes）
 	id:
 	pid:  // * 如果传递该参数，查询处于该pid下的节点
-	isdir: 
+	isDir: 
 	name:
 	path:
 	attributes:
 	remark:
-	isdelete:
-	doctorid: 
+	isDelete:
+	doctorId: 
 }
 ```
 
@@ -786,13 +786,13 @@ API包含内容：
 	// 和数据库表中字段一致
 	id:
 	pid:  // 必须
-	isdir:  // 必须
+	isDir:  // 必须
 	name:  // 必须
 	path:  
 	attributes:
 	remark:
-	isdelete: 0  // 非必须，不传后台默认给0
-	doctorid:  // 必须
+	isDelete: 0  // 非必须，不传后台默认给0
+	doctorId:  // 必须
 }
 ```
 
@@ -850,7 +850,7 @@ API包含内容：
 	name:  // 非必须
 	attributes: // 非必须
 	remark: // 非必须
-	isdelete: 0  // 非必须
+	isDelete: 0  // 非必须
 }
 ```
 
@@ -935,9 +935,9 @@ API包含内容：
 	id:
 	name:
 	remark:
-	isdelete:
-	shareid:
-	doctorids: // 本条件使用英文逗号分隔，如: "111,222,333", 后台查询包含这些医生id的群聊, 这些id是无需的, 不要硬匹配或使用"=="或LIKE
+	isDelete:
+	shareId:
+	doctorIds: // 本条件使用英文逗号分隔，如: "111,222,333", 后台查询包含这些医生id的群聊, 这些id是无需的, 不要硬匹配或使用"=="或LIKE
 }
 ```
 
@@ -971,9 +971,9 @@ API包含内容：
 {
 	name:
 	remark:
-	isdelete:
-	shareid:
-	doctorids: // 如: "111,222,333"
+	isDelete:
+	shareId:
+	doctorIds: // 如: "111,222,333"
 }
 ```
 
@@ -1029,7 +1029,7 @@ API包含内容：
 	// 要修改的字段，传了就修改，没传不修改
 	name:
 	remark:
-	isdelete:
+	isDelete:
 }
 ```
 
@@ -1137,10 +1137,10 @@ API包含内容：
 	id:
 	type:
 	remark:
-	isdelete:
-	chatid:
-	informationid: :
-	doctorid:
+	isDelete:
+	chatId:
+	informationId: :
+	doctorId:
 }
 ```
 
@@ -1174,10 +1174,10 @@ API包含内容：
 {
 	type:
 	remark:
-	isdelete: 0
-	chatid:
-	informationid: :
-	doctorid:
+	isDelete: 0
+	chatId:
+	informationId: :
+	doctorId:
 }
 ```
 
@@ -1233,7 +1233,7 @@ API包含内容：
 	// 要修改的字段，传了就修改，没传不修改
 	type:
 	remark:
-	isdelete: 0
+	isDelete: 0
 }
 ```
 
@@ -1366,7 +1366,7 @@ API包含内容：
 	id:
 	content:
 	remark:
-	isdelete:
+	isDelete:
 }
 ```
 
@@ -1398,10 +1398,9 @@ API包含内容：
 
 ```
 {
-	id:
 	content:
 	remark:
-	isdelete:
+	isDelete:
 }
 ```
 
@@ -1457,7 +1456,7 @@ API包含内容：
 	// 要修改的字段，传了就修改，没传不修改
 	content:
 	remark:
-	isdelete:
+	isDelete:
 }
 ```
 
@@ -1472,14 +1471,16 @@ API包含内容：
 
 ## ==== 以下是关联表 ====
 
-## 1.8 医院-科室表 （hospital_department）
+## 1.8 分享表 （share）
+
+因为是关联表，所以在查询时，需要把关联的外键对象查询出来。
 
 ### 1.8.1 查询单个信息（ID）
 
 - [ ] 开发完成
 - [ ] 测试完成
 
-超链接：/information/select/single/informationByID
+超链接：/share/select/single/shareByID
 
 输入数据：
 
@@ -1493,18 +1494,37 @@ API包含内容：
 
 ```
 {
-	row: {信息对象}
+	row: {
+		id:
+		remark:
+		isdelete:
+		gmtCreate:
+		gmtModified:
+		sendDoctorId:
+		receiveDoctorId:
+		filetreeId:
+		// 三个外键对应的对象
+		sendDoctor: {
+		
+		}
+		receiveDoctor: {
+		
+		}
+		filetree: {
+		
+		}
+	}
 	status: 0
 	msg: ""
 }
 ```
 
-### 1.7.2 查询信息（分页+条件）
+### 1.8.2 查询信息（分页+条件）
 
 - [ ] 开发完成
 - [ ] 测试完成
 
-超链接：/information/select/multiple/paging/informationInfo
+超链接：/share/select/multiple/paging/shareInfo
 
 输入数据：
 
@@ -1526,8 +1546,8 @@ API包含内容：
 ```
 {
 	rows: [
-		{信息对象1},
-		{信息对象2},
+		{分享对象1，这些对象包含的内容和1.8.1一样},
+		{分享对象2},
 		...
 	]
 	totals: 12
@@ -1536,12 +1556,12 @@ API包含内容：
 }
 ```
 
-### 1.7.3 增加新信息（发送消息）
+### 1.8.3 增加新分享（医生发起会诊）
 
 - [ ] 开发完成
 - [ ] 测试完成
 
-超链接：/information/add/informationInfo
+超链接：/share/add/shareInfo
 
 方法描述：增加新信息，和1.6一起使用。
 
@@ -1549,10 +1569,11 @@ API包含内容：
 
 ```
 {
-	id:
-	content:
 	remark:
-	isdelete:
+	isDelete:
+	send_doctor_id:
+	received_doctor_id:
+	filetree_id:
 }
 ```
 
@@ -1565,14 +1586,14 @@ API包含内容：
 }
 ```
 
-### 1.7.4 删除信息
+### 1.8.4 删除分享
 
 - [ ] 开发完成
 - [ ] 测试完成
 
-超链接：/information/del/informationByIDs
+超链接：/share/del/shareByIDs
 
-方法描述：根据ID删除信息，仅修改is_delete状态。可删除1个，也可删除多个。
+方法描述：根据ID删除共享信息，仅修改is_delete状态。可删除1个，也可删除多个。
 
 输入数据：
 
