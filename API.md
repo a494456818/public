@@ -1654,11 +1654,10 @@ API包含内容：
 	pagesize:
 	// 下面为数据库中的条件参数, 模糊查询字段（address、remark）
 	id:
-	result:
+	anno_result:
+	cls
 	remark:
 	isDelete:
-	gmtCreate:
-	gmtModified:
 	doctorId:
 	filetreeId:
 }
@@ -1690,7 +1689,8 @@ API包含内容：
 
 ```
 {
-	result:
+	anno_result:
+	cls:
 	remark:
 	isDelete:
 	doctorId:
@@ -1834,8 +1834,6 @@ API包含内容：
 	remark:
 	isRead:
 	isDelete:
-	gmtCreate:
-	gmtModified:
 	sendDoctorId:
 	receiveDoctorId:
 }
