@@ -2005,3 +2005,95 @@ API包含内容：
 }
 ```
 
+## 2.2 算法相关
+
+支持模型：se_resnext50_32x4d、resnet101、efficientnet-b6
+
+### 2.2.1 根据单张DCM图像获取智慧诊断结果
+
+- [ ] 开发完成
+- [ ] 测试完成
+
+超链接：/analysis/getResultBySingleDcm/
+
+输入数据：
+
+```
+{
+	dcmfile: // 前台上传的dcm文件
+	modelname: "se_resnext50_32x4d"// 要使用的模型
+}
+```
+
+返回数据：
+
+```
+{
+	row: {
+		"bl_anno": // 512*512的list
+		"sb_anno": // 512*512的list
+		"st_anno": // 512*512的list
+		"cls": 1 // 类别从0开始，[0,3]，表示从轻到严重
+		"statistical_info": {
+			"bl_ratio":
+			"sb_ratio":
+			"st_ratio":
+		}
+	}
+	status: 0
+	msg: ""
+}
+```
+
+一个使用的示例：
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+	<script src="./js/jquery-3.5.1.min.js"></script>
+</head>
+<body>
+	
+<div style="align-items: center;align-content: center;">
+	<h1>文件上传</h1>
+	<form id="form" method="post" enctype="multipart/form-data">
+		<p>请选择要上传的文件:</p>
+		<input id="dcmfile" name="dcmfile" type="file" multiple="multiple"/>
+		<br>
+		<input id="upload" name="upload" type="button" value="上传">
+	</form>
+</div>
+ 
+</body>
+
+<script type="text/javascript">
+    $(window).ready(function () {
+       $("#upload").click(function () {
+		   var file = document.getElementById("dcmfile").files[0];
+		   var formData = new FormData();
+		   formData.append("dcmfile",file);
+		   formData.append("modelname", "se_resnext50_32x4d")
+		   console.log(formData.get("dcmfile"));
+           $.ajax({
+               url:"http://127.0.0.1:8000/analysis/getResultBySingleDcm/",//后台的接口地址
+               type:"post",//post请求方式
+               data: formData,//参数
+               cache: false,
+               processData: false,
+               contentType: false,
+               success:function (data) {
+                   console.log(data);
+               },error:function () {
+                   alert("操作失败~");
+               }
+ 
+           })
+       });
+    });
+</script>
+</html>
+```
+
