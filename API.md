@@ -936,8 +936,7 @@ API包含内容：
 	name:
 	remark:
 	isDelete:
-	shareId:
-	doctorIds: // 本条件使用英文逗号分隔，如: "111,222,333", 后台查询包含这些医生id的群聊, 这些id是无需的, 不要硬匹配或使用"=="或LIKE
+	filetreeId:
 }
 ```
 
@@ -972,8 +971,7 @@ API包含内容：
 	name: // 必须
 	remark:
 	isDelete:
-	shareId:
-	doctorIds: // 如: "111,222,333"
+	filetreeId:
 }
 ```
 
@@ -1771,7 +1769,7 @@ API包含内容：
 
 超链接：/doctor_filetree/select/single/unDownloadNum
 
-方法描述：查询未下载的图像数量，也就是在该表中查询status=1的图像。
+方法描述：查询未下载的图像数量，也就是在该表中查询status=2的图像。
 
 输入数据：
 
@@ -1798,7 +1796,7 @@ API包含内容：
 
 超链接：/doctor_filetree/select/multiple/downloadUnDLDcmAndAnno
 
-方法描述：查找status=1的数据，将对应的图像通过网络传输出去（传送dcm和标注文件），并修改status=2。
+方法描述：查找status=1的数据，将对应的图像通过网络传输出去（传送dcm和标注文件），并修改status=3。
 
 输入数据：
 
@@ -1868,6 +1866,7 @@ API包含内容：
 	isDelete:
 	sendDoctorId:
 	receiveDoctorId:
+	filetreeId:
 }
 ```
 
@@ -1903,6 +1902,7 @@ API包含内容：
 	isDelete:
 	sendDoctorId:
 	receiveDoctorId:
+	filetreeId:
 }
 ```
 
