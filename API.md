@@ -1796,7 +1796,7 @@ API包含内容：
 
 超链接：/doctor_filetree/select/multiple/downloadUnDLDcmAndAnno
 
-方法描述：查找status=1的数据，将对应的图像通过网络传输出去（传送dcm和标注文件），并修改status=3。
+方法描述：查找status=2的数据，将对应的图像通过网络传输出去（传送dcm和标注文件），并修改status=3。
 
 输入数据：
 
