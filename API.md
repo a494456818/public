@@ -1652,8 +1652,20 @@ API包含内容：
 	pagesize:
 	// 下面为数据库中的条件参数, 模糊查询字段（address、remark）
 	id:
-	anno_result:
-	cls
+	anno_result: {
+		anno: {
+			blAnno:
+			sbAnno:
+			stAnno:
+		},
+		cls:
+		ratio: {
+			blRatio:
+			sbRatio:
+			stRatio:
+		}
+	}
+	cls:
 	remark:
 	isDelete:
 	doctorId:
@@ -1742,6 +1754,7 @@ API包含内容：
 
 ```
 {
+	id:
 	anno_result:
 	cls:
 	remark:
